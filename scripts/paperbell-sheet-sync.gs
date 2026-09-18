@@ -29,7 +29,7 @@
 
 // ─── CONFIG ──────────────────────────────────────────────────────────────────
 
-const SHEET_NAME   = 'Paperbell Purchases';
+const SHEET_NAME   = 'DO NOT EDIT-Zap Data';
 const MAX_ATTEMPTS = 3;
 const SENT_IDS_KEY = 'sentPurchaseIds';
 
