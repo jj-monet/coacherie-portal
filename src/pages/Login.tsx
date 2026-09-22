@@ -2,15 +2,29 @@ import { useState } from "react";
 import { supabase } from "../lib/supabase";
 
 // Reconciles any purchases made before this email ever logged in — turns
-// them into entitlements now that a client_id exists. Runs once per login;
-// safe to call repeatedly since entitlements are upserted on (client_id,
-// product_id). This mirrors what the webhook receiver does for purchases
-// that arrive after a client already has an account (plan §6).
+// them into entitlements now that a client_id exists. Runs on every Portal
+// load; safe to call repeatedly since everything here is an upsert.
 async function reconcilePurchases(clientId: string, email: string) {
-  const { data: purchases } = await supabase
+  // Ensure the clients row exists before anything references it as a
+  // foreign key — nothing else creates this row automatically.
+  const { error: clientErr } = await supabase
+    .from("clients")
+    .upsert({ id: clientId, email }, { onConflict: "id" });
+
+  if (clientErr) {
+    console.error("Failed to upsert clients row:", clientErr);
+    return;
+  }
+
+  const { data: purchases, error: purchasesErr } = await supabase
     .from("purchases")
     .select("id, product_id")
     .ilike("client_email", email);
+
+  if (purchasesErr) {
+    console.error("Failed to fetch purchases:", purchasesErr);
+    return;
+  }
 
   if (!purchases?.length) return;
 
@@ -22,7 +36,7 @@ async function reconcilePurchases(clientId: string, email: string) {
     .maybeSingle();
 
   for (const purchase of purchases) {
-    await supabase.from("entitlements").upsert(
+    const { error: entErr } = await supabase.from("entitlements").upsert(
       {
         client_id: clientId,
         product_id: purchase.product_id,
@@ -32,6 +46,9 @@ async function reconcilePurchases(clientId: string, email: string) {
       },
       { onConflict: "client_id,product_id" },
     );
+    if (entErr) {
+      console.error(`Failed to upsert entitlement for purchase ${purchase.id}:`, entErr);
+    }
   }
 }
 
@@ -71,9 +88,6 @@ export function Login() {
   return (
     <div className="card" style={{ maxWidth: 420, margin: "4rem auto" }}>
       <h1>Welcome back</h1>
-      {/* Plan §6 — this is the single most important line on this screen.
-          It's what prevents most of the "why can't I see my course" support
-          requests before they happen. */}
       <p>
         Log in with the <strong>same email you purchased with</strong>.
         That's how we find your courses.
