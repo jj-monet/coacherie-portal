@@ -64,17 +64,22 @@ Deno.serve(async (req) => {
     return new Response("Internal error", { status: 500 });
   }
 
+  // In LIKE patterns, "_" and "%" are wildcards. Emails often contain "_", so escape
+  // them or "a_b@x.com" would also match "axb@x.com" (someone else's account).
+  const likeSafeEmail = buyerEmail.replace(/[\\%_]/g, "\\$&");
+
   const { data: relationship } = await supabase
     .from("coaching_relationships")
     .select("id")
     .eq("active", true)
-    .ilike("client_email", buyerEmail)
+    .ilike("client_email", likeSafeEmail)
     .maybeSingle();
 
+  // clients.email is stored lowercase, so an exact match on the lowercased email is enough.
   const { data: existingClient } = await supabase
     .from("clients")
     .select("id")
-    .ilike("email", buyerEmail)
+    .eq("email", buyerEmail.toLowerCase())
     .maybeSingle();
 
   // If this person has already logged in once, grant access now: the product
