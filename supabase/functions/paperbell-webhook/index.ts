@@ -10,6 +10,13 @@ Deno.serve(async (req) => {
     return new Response("Method not allowed", { status: 405 });
   }
 
+  // Optional shared-secret check. Off until a WEBHOOK_SECRET is set for this
+  // function; once it is, the caller must send a matching x-webhook-secret header.
+  const expectedSecret = Deno.env.get("WEBHOOK_SECRET");
+  if (expectedSecret && req.headers.get("x-webhook-secret") !== expectedSecret) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   let payload: any;
   try {
     payload = await req.json();
@@ -25,9 +32,7 @@ Deno.serve(async (req) => {
     return new Response("Missing required fields", { status: 400 });
   }
 
-  // Product mapping now lives in the database (products.paperbell_product_id)
-  // instead of hardcoded here — adding a new product later just means adding
-  // a row, not editing and redeploying this function.
+  // Product mapping lives in the database (products.paperbell_product_id).
   const { data: product, error: productErr } = await supabase
     .from("products")
     .select("id")
@@ -69,22 +74,21 @@ Deno.serve(async (req) => {
   const { data: existingClient } = await supabase
     .from("clients")
     .select("id")
-    .eq("email", buyerEmail)
+    .ilike("email", buyerEmail)
     .maybeSingle();
 
+  // If this person has already logged in once, grant access now: the product
+  // itself plus everything bundled with it. If not, the entitlements are created
+  // the first time they load the portal (reconcile_my_entitlements).
   if (existingClient) {
-    const { error: entitlementErr } = await supabase.from("entitlements").upsert(
-      {
-        client_id: existingClient.id,
-        product_id: product.id,
-        coaching_relationship_id: relationship?.id ?? null,
-        source: "purchase",
-        purchase_id: purchase.id,
-      },
-      { onConflict: "client_id,product_id" },
-    );
-    if (entitlementErr) {
-      console.error("Entitlement upsert failed", entitlementErr);
+    const { error: grantErr } = await supabase.rpc("grant_product_entitlements", {
+      p_client_id: existingClient.id,
+      p_product_id: product.id,
+      p_purchase_id: purchase.id,
+      p_relationship_id: relationship?.id ?? null,
+    });
+    if (grantErr) {
+      console.error("Granting entitlements failed", grantErr);
       return new Response("Internal error", { status: 500 });
     }
   }

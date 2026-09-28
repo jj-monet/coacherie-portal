@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { supabase } from "./lib/supabase";
 import { Login } from "./pages/Login";
 import { Portal } from "./pages/Portal";
+import { ToolViewer } from "./pages/ToolViewer";
 import { CoachDashboard } from "./pages/CoachDashboard";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={session ? <Navigate to="/portal" /> : <Login />} />
       <Route path="/portal" element={session ? <Portal /> : <Navigate to="/" />} />
+      <Route path="/tools/:slug" element={session ? <ToolViewer /> : <Navigate to="/" />} />
       <Route path="/coach" element={session ? <CoachDashboard /> : <Navigate to="/" />} />
     </Routes>
   );
