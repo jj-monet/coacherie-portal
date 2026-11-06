@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Thank you | The Coacherie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --charcoal: #2D2A26;
+    --sienna: #B05A40;
+    --honey: #8C6845;
+    --walnut: #8C7B72;
+    --cream: #FBF8F3;
+    --linen: #F1EBE2;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .mark, .headline, .body-copy, .cta, .note, .secondary {
+      animation: rise 0.6s ease-out both;
+    }
+    .mark { animation-delay: 0s; }
+    .headline { animation-delay: 0.08s; }
+    .body-copy { animation-delay: 0.16s; }
+    .cta { animation-delay: 0.24s; }
+    .secondary { animation-delay: 0.3s; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  .page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6vh 1.5rem;
+  }
+
+  .card {
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: var(--walnut);
+    margin: 0 0 2.5rem;
+  }
+
+  .headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    line-height: 1.15;
+    margin: 0 0 1.25rem;
+    color: var(--charcoal);
+  }
+
+  .body-copy {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--charcoal);
+    max-width: 42ch;
+    margin: 0 auto 2.25rem;
+  }
+
+  .body-copy + .body-copy {
+    margin-top: -1.5rem;
+  }
+
+  .cta {
+    display: inline-block;
+    background: var(--sienna);
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.85rem 2.25rem;
+    border-radius: 2px;
+    transition: background-color 0.15s ease;
+  }
+
+  .cta:hover { background: #99492F; }
+  .cta:focus-visible {
+    outline: 2px solid var(--honey);
+    outline-offset: 3px;
+  }
+
+  .note {
+    margin: 1.75rem auto 0;
+    max-width: 40ch;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--walnut);
+  }
+
+  .secondary {
+    margin-top: 1.25rem;
+  }
+
+  .secondary a {
+    color: var(--walnut);
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--linen);
+  }
+
+  .secondary a:hover { color: var(--charcoal); }
+  .secondary a:focus-visible {
+    outline: 2px solid var(--honey);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="card">
+      <p class="mark">The Coacherie</p>
+
+      <h1 class="headline">Thank you. You're all set.</h1>
+
+      <p class="body-copy">
+        Your access is being added to your account. It usually shows up in about 15 minutes.
+      </p>
+      <p class="body-copy">
+        Log in with <strong>the same email you used at checkout</strong>. That's how we find what's yours.
+      </p>
+
+      <a class="cta" href="https://portal.thecoacherie.com">Go to your account</a>
+
+      <p class="note">Coming from Instagram? Open this page in Safari or Chrome so your login link works.</p>
+
+      <p class="secondary">
+        <a href="https://thecoacherie.com">Back to thecoacherie.com</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
