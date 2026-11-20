@@ -115,6 +115,9 @@ footer a{color:var(--pink-hi);text-decoration:underline;text-underline-offset:3p
 footer a:hover{color:var(--cream)}
 footer{max-width:720px;margin:0 auto;padding:30px 20px 40px;color:var(--muted);font-size:.85rem;text-align:center}
 footer p{margin:0 0 .4em}
+.inapp{background:var(--panel);border:1.5px dashed var(--edge);border-radius:12px;padding:12px 14px;margin:0 0 18px;font-size:.9rem;color:var(--cream)}
+.inapp strong{color:var(--pink-hi)}
+.inapp .btn{margin-top:8px;padding:8px 18px;font-size:.9rem}
 @media (max-width:999px){
   body{position:relative}
   .deco{position:absolute;inset:0;height:100%}
@@ -146,7 +149,8 @@ footer p{margin:0 0 .4em}
 <footer>
   <p>The Coacherie &middot; Coaching for what comes next.</p>
   <p><a href="https://paperbell.me/coacherie" target="_blank" rel="noopener">Book a session at paperbell.me/coacherie</a></p>
-  <p>A coaching reflection tool. It isn't therapy or medical advice. Your answers stay in your browser.</p>
+  <p>This is a coaching reflection tool, and is not professional therapy or medical advice.</p>
+  <p>Your answers stay in your browser and are not transmitted anywhere unless you choose to.</p>
 </footer>
 
 <script>
@@ -213,13 +217,24 @@ function go(step, idx){
   save(); render(); window.scrollTo(0,0);
 }
 
+
+// Instagram, Facebook, TikTok and similar apps open links in their own built-in browser,
+// which can't print or save to PDF, and keeps saved lists separate from the phone's browser.
+var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|musical_ly|TikTok|BytedanceWebview|Snapchat|Pinterest|LinkedInApp/i.test(navigator.userAgent || '');
+function inAppBanner(){
+  if (!IN_APP) return '';
+  return '<div class="inapp no-print"><strong>Viewing this inside an app?</strong> Printing and saving to PDF won\'t work here, and your list is saved only in this app\'s browser. ' +
+    'For the best experience, tap the <strong>&bull;&bull;&bull;</strong> menu and choose <strong>Open in browser</strong> (or Open in Safari or Chrome).' +
+    '<br><button class="btn ghost" data-act="copylink">Copy this page\'s link</button><span class="small muted" id="linkStatus" role="status" style="margin-left:10px"></span></div>';
+}
+
 function render(){
   var h = '';
   if (state.step === 'intro') h = viewIntro();
   else if (state.step === 'add') h = viewAdd();
   else if (state.step === 'rate') h = viewRate();
   else h = viewResults();
-  app().innerHTML = h;
+  app().innerHTML = inAppBanner() + h;
 }
 
 function viewIntro(){
@@ -306,7 +321,7 @@ function viewResults(){
     });
     out += '</section>';
   });
-  out += '<div class="actions no-print"><button class="btn" data-act="print">Print or save as PDF</button><button class="btn ghost" data-act="edit">Edit my ratings</button><button class="btn ghost" data-act="restart">Start over</button></div>';
+  out += '<div class="actions no-print"><button class="btn" data-act="print">Print or save as PDF</button><button class="btn ghost" data-act="copylist">Copy my list</button><button class="btn ghost" data-act="edit">Edit my ratings</button><button class="btn ghost" data-act="restart">Start over</button></div><p class="status no-print" id="actStatus" role="status"></p>';
   out += '<div class="email no-print"><h3>Want a copy in your inbox?</h3>' +
     '<p class="small">This opens your email app with your list and ratings filled in. Add your own address and send it. Nothing is sent to us.</p>' +
     '<button class="btn" data-act="mailme">Email my list to myself</button><p class="status" id="mailStatus" role="status"></p></div>';
@@ -335,6 +350,7 @@ function summaryText(withRatings){
 // so drop the ratings first, and if it is still too long, copy the text instead.
 var MAILTO_MAX = 1900;
 function openMail(url){ window.location.href = url; }
+function actSay(msg){ var el = document.getElementById('actStatus'); if (el) el.textContent = msg; }
 function mailStatus(msg){ var el = document.getElementById('mailStatus'); if (el) el.textContent = msg; }
 function copyText(text, done, fail){
   function fallback(){
@@ -356,7 +372,7 @@ function mailMe(){
     var body = summaryText(variants[n]).replace(/\n/g, '\r\n');
     var url = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     if (url.length <= MAILTO_MAX) {
-      mailStatus(variants[n] ? 'Opening your email app. Add your own address and send.' : 'Opening your email app. Your list was long, so the ratings were left out of the email.');
+      mailStatus((variants[n] ? 'Opening your email app. Add your own address and send.' : 'Opening your email app. Your list was long, so the ratings were left out of the email.') + (IN_APP ? ' If nothing opens, use Copy my list instead.' : ''));
       openMail(url);
       return;
     }
@@ -411,7 +427,16 @@ document.addEventListener('click', function(e){
   else if (act === 'restart') {
     if (confirm('Start over? This clears your list.')) { state = {step:'intro', items:[], idx:0}; save(); render(); window.scrollTo(0,0); }
   }
-  else if (act === 'print') { window.print(); }
+  else if (act === 'print') {
+    if (IN_APP) { actSay("Printing isn't available inside this app. Open this page in your browser (tap the ••• menu, then Open in browser), or use Copy my list or Email my list to myself."); }
+    else { window.print(); }
+  }
+  else if (act === 'copylist') {
+    copyText(summaryText(true), function(){ actSay('Copied. Paste it into Notes, a text, or an email.'); }, function(){ actSay("Couldn't copy from here. Try Email my list to myself instead."); });
+  }
+  else if (act === 'copylink') {
+    copyText(location.href, function(){ var l = document.getElementById('linkStatus'); if (l) l.textContent = 'Link copied.'; }, function(){ var l = document.getElementById('linkStatus'); if (l) l.textContent = "Couldn't copy. Tap and hold the address instead."; });
+  }
   else if (act === 'mailme') { mailMe(); }
 });
 
