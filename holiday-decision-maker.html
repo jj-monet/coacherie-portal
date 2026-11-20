@@ -111,6 +111,8 @@ input[type=checkbox]{accent-color:var(--pink)}
 .email label.check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:.92rem}
 .email label.check input{margin-top:4px}
 .status{margin-top:10px;font-size:.95rem}
+footer a{color:var(--pink-hi);text-decoration:underline;text-underline-offset:3px}
+footer a:hover{color:var(--cream)}
 footer{max-width:720px;margin:0 auto;padding:30px 20px 40px;color:var(--muted);font-size:.85rem;text-align:center}
 footer p{margin:0 0 .4em}
 @media (max-width:999px){
@@ -143,6 +145,7 @@ footer p{margin:0 0 .4em}
 </div>
 <footer>
   <p>The Coacherie &middot; Coaching for what comes next.</p>
+  <p><a href="https://paperbell.me/coacherie" target="_blank" rel="noopener">Book a session at paperbell.me/coacherie</a></p>
   <p>A coaching reflection tool. It isn't therapy or medical advice. Your answers stay in your browser.</p>
 </footer>
 
@@ -158,7 +161,7 @@ var QUESTIONS = [
 ];
 var WHO = [['me','Me'],['kids','My kids'],['partner','My partner'],['family','Extended family'],['expect',"Other people's expectations"]];
 var YMN = [[2,'Yes'],[1,'Maybe'],[0,'No']];
-var CHIPS = ['Holiday cards','Elf on the Shelf','Hosting a meal','Traveling to family','Teacher and coach gifts','Baking cookies','Matching pajamas','Santa photos','Holiday parties','Gifts for extended family','Decorating the whole house','Advent calendar'];
+var CHIPS = ['Holiday cards','Elf on the Shelf','Hosting a meal','Traveling to family','Teacher and coach gifts','Baking cookies','Matching pajamas','Santa photos','Holiday parties','Gifts for extended family','Decorating the whole house','Advent calendar','Family photos','Hosting overnight guests','Volunteering or giving back','Party or potluck contributions','Work or school events','Gift exchange','Saying yes to every invite','Year-end to-dos','Time with friends','Quiet time for myself','Thanksgiving hosting','Hanukkah gatherings','Kwanzaa celebrations','Winter solstice gathering','Lunar New Year','New Year\'s Eve plans'];
 
 var BUCKETS = [
   {id:'keep',    name:'Keep it',          desc:'Worth the effort. Enjoy it.'},
@@ -239,7 +242,7 @@ function viewAdd(){
   }).join('');
   return '<h2>' + "What's on your holiday plate?" + '</h2>' +
     '<p>Add the events, traditions, tasks, and trips you are thinking about. Start with the ones that feel heaviest.</p>' +
-    '<div class="add-row"><input type="text" id="newItem" placeholder="For example: Hosting Christmas dinner" maxlength="80" aria-label="Add something to your list"><button class="btn" data-act="add">Add</button></div>' +
+    '<div class="add-row"><input type="text" id="newItem" placeholder="For example: Hosting the holiday meal" maxlength="80" aria-label="Add something to your list"><button class="btn" data-act="add">Add</button></div>' +
     '<p class="muted small" style="margin:14px 0 0">Or tap to add:</p><div class="chips">' + chips + '</div>' +
     '<ul class="list">' + list + '</ul>' +
     '<div class="nav"><button class="btn ghost" data-act="toIntro">Back</button><button class="btn" data-act="toRate"' + (state.items.length ? '' : ' disabled') + '>Start rating (' + state.items.length + ')</button></div>';
@@ -307,6 +310,18 @@ function viewResults(){
   return out;
 }
 
+function summaryText(){
+  var t = 'merry + mentally ok: my holiday list\n\n';
+  BUCKETS.forEach(function(b){
+    var list = state.items.filter(function(i){ return i.bucket === b.id; });
+    if (!list.length) return;
+    t += b.name.toUpperCase() + '\n';
+    list.forEach(function(i){ t += '- ' + i.name + (i.note ? ': ' + i.note : '') + '\n'; });
+    t += '\n';
+  });
+  t += 'Want help with what\'s still on your mind? Book a session with The Coacherie: https://paperbell.me/coacherie\n';
+  return t;
+}
 
 function addItem(name){
   name = (name || '').trim();
