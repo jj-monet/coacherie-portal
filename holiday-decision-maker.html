@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>merry + mentally ok | the holiday decision maker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#4A0D10; --bg-deep:#3A090C; --panel:#5A1519;
+  --pink:#EE9A9A; --pink-hi:#F8B9B7; --soft:#F6C9C6; --cream:#FFF1EE; --muted:#E3AFAD; --sparkle:#C95A5A;
+  --edge:rgba(238,154,154,.55);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100vh;background-color:var(--bg);background-image:radial-gradient(ellipse at 50% 0%,rgba(255,200,200,.07),transparent 60%);color:var(--soft);font-family:'Montserrat',system-ui,-apple-system,sans-serif;font-weight:400;font-size:16px;line-height:1.6}
+.deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.d{position:absolute;display:block;overflow:visible}
+.d-orn{left:4%;top:0;width:clamp(44px,7vw,84px)}
+.d-mist{right:-6px;top:-4px;width:clamp(92px,15vw,170px)}
+.d-star{left:-14px;top:40%;width:clamp(44px,6vw,70px)}
+.d-bauble{right:-12px;top:52%;width:clamp(48px,7vw,84px)}
+.d-gift{left:-16px;bottom:-14px;width:clamp(100px,17vw,200px)}
+.d-tree{right:-14px;bottom:-16px;width:clamp(110px,18vw,220px)}
+.sp{width:24px;animation:twinkle 4.5s ease-in-out infinite alternate}
+.sp1{left:9%;top:10%}
+.sp2{right:9%;top:25%;animation-delay:1.1s}
+.sp3{left:3%;top:24%;animation-delay:2.2s}
+.sp4{right:4%;top:44%;animation-delay:.6s}
+.sp5{left:7%;bottom:30%;animation-delay:1.8s}
+.sp6{right:8%;bottom:34%;animation-delay:2.8s}
+@keyframes twinkle{from{opacity:.25}to{opacity:1}}
+.top,.wrap,footer{position:relative;z-index:1}
+.top{text-align:center;padding:22px 20px 0}
+.brand{font-family:'Montserrat',system-ui,sans-serif;font-weight:400;font-size:1.15rem;letter-spacing:.06em;text-transform:lowercase;color:var(--pink)}
+.wrap{max-width:720px;margin:0 auto;padding:26px 20px 24px}
+h1,h2,h3{font-family:'Montserrat',system-ui,sans-serif;font-weight:500;line-height:1.2;margin:0 0 .5em;color:var(--pink)}
+h1{font-size:clamp(1.8rem,6vw,2.4rem)}
+h2{font-size:clamp(1.3rem,4.4vw,1.7rem)}
+h3{font-size:1.15rem;font-weight:600;color:var(--cream);margin-bottom:.3em}
+p{margin:0 0 1em}
+.title{display:block;width:fit-content;margin:0 auto .8em;font-weight:400;line-height:1;text-align:left}
+.merry{display:block;font-family:'Sacramento','Brush Script MT',cursive;font-weight:400;font-size:clamp(5.5rem,30vw,12rem);color:var(--pink);-webkit-text-stroke:.02em var(--pink);line-height:.85}
+.plus{display:block;font-family:'Montserrat',system-ui,sans-serif;font-weight:400;font-size:clamp(1.2rem,5.2vw,2.1rem);color:var(--pink);margin-top:-.1em;margin-left:3%}
+h1.script{font-family:'Sacramento','Brush Script MT',cursive;font-weight:400;font-size:clamp(3.4rem,14vw,5.6rem);color:var(--pink);-webkit-text-stroke:.02em var(--pink);line-height:1;margin:0 0 .3em}
+.sub{font-weight:400;font-size:1.05rem;letter-spacing:.05em;color:var(--pink);text-align:center;margin:.4em 0 1.6em}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.frame{background:none;padding:0;margin-bottom:8px}
+.frame .inner{background:none;color:var(--soft);padding:6px 0;text-align:center}
+.frame .inner p:not(.sub){max-width:34rem;margin-left:auto;margin-right:auto}
+.frame .row{justify-content:center;margin-top:8px}
+.card{position:relative;overflow:hidden;background:var(--panel);color:var(--soft);border:1.5px solid var(--edge);border-radius:14px;padding:24px 22px 22px;margin:0 0 16px}
+.card::before,.email::before{content:'';position:absolute;right:14px;top:12px;width:18px;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-12 -12 24 24' fill='none' stroke='%23C95A5A' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M0 -10V10M-6.5 0H6.5M-5 -6L5 6M-5 6L5 -6'/%3E%3C/svg%3E") no-repeat center/contain}
+.btn{font:600 1rem 'Montserrat',system-ui,sans-serif;background:var(--pink);color:var(--bg);border:1.5px solid var(--pink);border-radius:999px;padding:12px 26px;cursor:pointer}
+.btn:hover{background:var(--pink-hi);border-color:var(--pink-hi)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--pink);border:1.5px solid var(--pink)}
+.btn.ghost:hover{background:rgba(238,154,154,.14)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:24px}
+:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+input[type=text],input[type=email],textarea,select{font:400 1rem 'Montserrat',system-ui,sans-serif;color:var(--cream);background:var(--bg-deep);border:1.5px solid var(--pink);border-radius:10px;padding:12px 14px;width:100%;caret-color:var(--pink)}
+input::placeholder,textarea::placeholder{color:#D59E9C;opacity:1}
+select{width:auto;padding:8px 10px}
+select option{background:var(--bg-deep);color:var(--cream)}
+textarea{resize:vertical}
+input[type=checkbox]{accent-color:var(--pink)}
+.add-row{display:flex;gap:10px}
+.add-row input{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.chip{font:400 .92rem 'Montserrat',sans-serif;background:transparent;color:var(--pink);border:1.5px solid var(--edge);border-radius:999px;padding:7px 15px;cursor:pointer}
+.chip:hover{border-color:var(--pink);background:rgba(238,154,154,.14)}
+.chip[disabled]{opacity:.4;cursor:default}
+.list{list-style:none;padding:0;margin:16px 0 0}
+.list li{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--panel);color:var(--cream);border:1.5px solid var(--edge);border-left:5px solid var(--pink);border-radius:12px;padding:11px 14px;margin-bottom:8px}
+.x{background:none;border:0;color:var(--muted);font-size:1.3rem;line-height:1;cursor:pointer;padding:4px 8px}
+.x:hover{color:var(--cream)}
+.progress{color:var(--muted);font-size:.95rem;margin-bottom:6px}
+.q{margin:0 0 26px}
+.q-title{font-weight:600;color:var(--cream);margin:0 0 4px}
+.scale{display:flex;gap:8px;margin:8px 0 4px}
+.scale button{flex:1;max-width:64px;min-height:46px;font:500 1.05rem 'Montserrat',sans-serif;background:transparent;color:var(--pink);border:1.5px solid var(--pink);border-radius:12px;cursor:pointer}
+.scale button:hover{background:rgba(238,154,154,.16)}
+.scale button[aria-pressed=true],.opts button[aria-pressed=true]{background:var(--pink);border-color:var(--pink);color:var(--bg);font-weight:700}
+.ends{display:flex;justify-content:space-between;font-size:.85rem;color:var(--muted);max-width:392px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.opts button{font:500 .95rem 'Montserrat',sans-serif;min-height:44px;padding:8px 17px;background:transparent;color:var(--pink);border:1.5px solid var(--pink);border-radius:999px;cursor:pointer}
+.opts button:hover{background:rgba(238,154,154,.16)}
+.bucket{margin:40px 0 8px}
+.bucket h2{margin-bottom:.4em;text-transform:lowercase;letter-spacing:.02em}
+.bucket h2::after{content:'';display:block;width:96px;height:8px;margin-top:8px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M0 4Q6 0 12 4T24 4' fill='none' stroke='%23EE9A9A' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x}
+.ratings{margin:4px 0 14px;padding:12px 14px;background:rgba(0,0,0,.2);border:1px dashed var(--edge);border-radius:12px}
+.rt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:6px 20px}
+.rt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.86rem;color:var(--muted)}
+.dots{display:inline-flex;gap:4px}
+.dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--pink);background:transparent}
+.dot.on{background:var(--pink)}
+.rt-line{margin:10px 0 0;font-size:.86rem;color:var(--muted)}
+.rt-line strong{color:var(--cream)}
+.why{margin:.2em 0 12px}
+.why strong{color:var(--pink)}
+.note{display:block;margin-top:12px;font-size:.9rem;color:var(--muted)}
+.note textarea{margin-top:4px}
+.move{margin-top:10px;font-size:.9rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}
+.email{position:relative;overflow:hidden;background:var(--bg-deep);color:var(--soft);border:1.5px dashed var(--edge);border-radius:14px;padding:24px 22px 22px;margin-top:28px}
+.email label.check{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:.92rem}
+.email label.check input{margin-top:4px}
+.status{margin-top:10px;font-size:.95rem}
+footer{max-width:720px;margin:0 auto;padding:30px 20px 40px;color:var(--muted);font-size:.85rem;text-align:center}
+footer p{margin:0 0 .4em}
+@media (max-width:999px){
+  body{position:relative}
+  .deco{position:absolute;inset:0;height:100%}
+  .d-star,.d-bauble,.sp{display:none}
+  .wrap{padding-top:44px}
+  footer{padding-bottom:170px}
+}
+@media (max-width:480px){.add-row{flex-wrap:wrap}.add-row .btn{flex:1}}
+@media (prefers-reduced-motion:reduce){.sp{animation:none;opacity:.8}}
+@media print{
+  :root{--bg:#fff;--bg-deep:#fff;--panel:#fff;--pink:#8A2B30;--pink-hi:#8A2B30;--soft:#2B0A0C;--cream:#2B0A0C;--muted:#5A3A3C;--edge:#bbb}
+  body{background:#fff;color:#2B0A0C}
+  .deco,.top{display:none!important}
+  .no-print{display:none!important}
+  .card{break-inside:avoid;box-shadow:none}
+  .card::before,.bucket h2::after{display:none}
+  .ratings{background:none}
+  .merry,h1.script{-webkit-text-stroke:0}
+  textarea{border:0;padding:0;resize:none;background:none}
+}
+</style>
+</head>
+<body>
+<div class="deco" aria-hidden="true"><svg class="d d-orn" viewBox="0 0 70 130" fill="none" stroke="#F2A3A3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M35 0 V30"/><path d="M29 30 h12 v8 h-12 z"/><path d="M35 38 C12 62 12 94 35 122 C58 94 58 62 35 38 Z"/><path d="M35 44 C27 66 27 92 35 114 M35 44 C43 66 43 92 35 114 M24 54 C18 74 21 92 30 108"/></svg><svg class="d d-mist" viewBox="0 0 150 160" fill="none" stroke="#F2A3A3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><g stroke="#C95A5A"><path d="M112 16 C99.0 1.0 90.0 18.0 109.0 19.0"/><path d="M112 16 C125.0 1.0 134.0 18.0 115.0 19.0"/><circle cx="112" cy="17.0" r="2.0"/><path d="M110.0 20.0 C107.0 28.0 102.0 36.0 104.0 45.0"/><path d="M114.0 20.0 C118.0 29.0 123.0 36.0 121.0 46.0"/></g><path d="M112 26 C96 54 66 74 30 94"/><path d="M112 26 C106 64 96 94 80 124"/><path d="M112 26 C124 60 122 94 110 132"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(62 74) rotate(150)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(62 74) rotate(205)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(30 94) rotate(175)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(46 86) rotate(128)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(94 98) rotate(108)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(94 98) rotate(68)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(80 124) rotate(95)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(88 110) rotate(135)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(122 94) rotate(58)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(122 94) rotate(100)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(110 132) rotate(90)"/><path d="M0 0 C6.6 -8.4 15.4 -8.4 22 0 C15.4 8.4 6.6 8.4 0 0 Z M2 0 L18.7 0" transform="translate(118 112) rotate(40)"/><circle cx="70" cy="66" r="3.2"/><circle cx="77" cy="73" r="3.2"/><circle cx="97" cy="104" r="3.2"/><circle cx="90" cy="110" r="3.2"/><circle cx="125" cy="102" r="3.2"/><circle cx="119" cy="108" r="3.2"/></svg><svg class="d d-star" viewBox="0 0 60 60" fill="none" stroke="#F2A3A3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M30.0 3.0 L33.8 20.8 L49.1 10.9 L39.2 26.2 L57.0 30.0 L39.2 33.8 L49.1 49.1 L33.8 39.2 L30.0 57.0 L26.2 39.2 L10.9 49.1 L20.8 33.8 L3.0 30.0 L20.8 26.2 L10.9 10.9 L26.2 20.8 Z"/><path d="M30 30 L30 4 M30 30 L56 30 M30 30 L11 49"/></svg><svg class="d d-bauble" viewBox="0 0 70 80" fill="none" stroke="#F2A3A3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="35" cy="7" r="4"/><path d="M30 14 h10 v6 h-10 z"/><circle cx="35" cy="48" r="26"/><path d="M10 42 Q35 54 60 42" stroke-dasharray="3 4"/><path d="M10 56 Q35 68 60 56" stroke-dasharray="3 4"/><path d="M35 45L35 53 M32.4 49L37.6 49 M33.0 46.5L37.0 51.5 M33.0 51.5L37.0 46.5"/></svg><svg class="d d-gift" viewBox="0 0 190 150" fill="none" stroke="#F2A3A3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-8 75 100)"><path d="M12 52 H138 V74 H12 Z"/><path d="M20 74 V142 H130 V74"/><path d="M65 52 V142 M85 52 V142"/><path d="M75 52 C45 18 24 46 70 54"/><path d="M75 52 C105 18 126 46 80 54"/><circle cx="75" cy="53" r="5"/></g></svg><svg class="d d-tree" viewBox="0 0 200 230" fill="none" stroke="#F2A3A3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M100 46 V72"/><path d="M100 70 L82 92 L91 84 L100 92 L109 84 L118 92 L100 70"/><path d="M100 96 L68 118 L77 110 L86 118 L95 110 L104 118 L113 110 L122 118 L131 110 L100 96"/><path d="M100 122 L54 144 L63 136 L72 144 L81 136 L90 144 L99 136 L108 144 L117 136 L126 144 L135 136 L144 144 L146 136 L100 122"/><path d="M100 148 L40 170 L49 162 L58 170 L67 162 L76 170 L85 162 L94 170 L103 162 L112 170 L121 162 L130 170 L139 162 L148 170 L157 162 L160 170 L100 148"/><path d="M100 174 L26 196 L35 188 L44 196 L53 188 L62 196 L71 188 L80 196 L89 188 L98 196 L107 188 L116 196 L125 188 L134 196 L143 188 L152 196 L161 188 L170 196 L174 188 L100 174"/><path d="M100 200 L12 222 L21 214 L30 222 L39 214 L48 222 L57 214 L66 222 L75 214 L84 222 L93 214 L102 222 L111 214 L120 222 L129 214 L138 222 L147 214 L156 222 L165 214 L174 222 L183 214 L188 222 L100 200"/><g stroke="#C95A5A"><path d="M100 34 C76.6 7.0 60.4 37.6 94.6 39.4"/><path d="M100 34 C123.4 7.0 139.6 37.6 105.4 39.4"/><circle cx="100" cy="35.8" r="3.6"/><path d="M96.4 41.2 C91.0 55.6 82.0 70.0 85.6 86.2"/><path d="M103.6 41.2 C110.8 57.4 119.8 70.0 116.2 88.0"/></g></svg><svg class="d sp sp1" viewBox="-14 -14 28 28" fill="none" stroke="#C95A5A" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11L0 11 M-7.2 0L7.2 0 M-5.5 -6.8L5.5 6.8 M-5.5 6.8L5.5 -6.8"/></svg><svg class="d sp sp2" viewBox="-14 -14 28 28" fill="none" stroke="#C95A5A" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11L0 11 M-7.2 0L7.2 0 M-5.5 -6.8L5.5 6.8 M-5.5 6.8L5.5 -6.8"/></svg><svg class="d sp sp3" viewBox="-14 -14 28 28" fill="none" stroke="#C95A5A" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11L0 11 M-7.2 0L7.2 0 M-5.5 -6.8L5.5 6.8 M-5.5 6.8L5.5 -6.8"/></svg><svg class="d sp sp4" viewBox="-14 -14 28 28" fill="none" stroke="#C95A5A" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11L0 11 M-7.2 0L7.2 0 M-5.5 -6.8L5.5 6.8 M-5.5 6.8L5.5 -6.8"/></svg><svg class="d sp sp5" viewBox="-14 -14 28 28" fill="none" stroke="#C95A5A" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11L0 11 M-7.2 0L7.2 0 M-5.5 -6.8L5.5 6.8 M-5.5 6.8L5.5 -6.8"/></svg><svg class="d sp sp6" viewBox="-14 -14 28 28" fill="none" stroke="#C95A5A" stroke-width="2.2" stroke-linecap="round"><path d="M0 -11L0 11 M-7.2 0L7.2 0 M-5.5 -6.8L5.5 6.8 M-5.5 6.8L5.5 -6.8"/></svg></div>
+<header class="top"><span class="brand">the coacherie</span></header>
+<div class="wrap">
+  <main id="app" aria-live="polite"></main>
+</div>
+<footer>
+  <p>The Coacherie &middot; Coaching for what comes next.</p>
+  <p>A coaching reflection tool. It isn't therapy or medical advice. Your answers stay in your browser.</p>
+</footer>
+
+<script>
+var STORE = 'coacherie-holiday-decision-maker-v1';
+
+var QUESTIONS = [
+  {k:'m', t:'How much joy does this bring?', lo:'Very little', hi:'A lot'},
+  {k:'c', t:"How likely is this to end in a crash out? (Yours, the kids', or a relative's.)", lo:'Unlikely', hi:'Very likely'},
+  {k:'t', t:'Is this a tradition worth keeping?', lo:'Just habit', hi:'Means a lot'},
+  {k:'k', t:'What does it cost you in time, money, and energy?', lo:'Very little', hi:'A lot'},
+  {k:'x', t:'If you skipped it, would anyone miss it?', lo:'No one would', hi:'Definitely'}
+];
+var WHO = [['me','Me'],['kids','My kids'],['partner','My partner'],['family','Extended family'],['expect',"Other people's expectations"]];
+var YMN = [[2,'Yes'],[1,'Maybe'],[0,'No']];
+var CHIPS = ['Holiday cards','Elf on the Shelf','Hosting a meal','Traveling to family','Teacher and coach gifts','Baking cookies','Matching pajamas','Santa photos','Holiday parties','Gifts for extended family','Decorating the whole house','Advent calendar'];
+
+var BUCKETS = [
+  {id:'keep',    name:'Keep it',          desc:'Worth the effort. Enjoy it.'},
+  {id:'smaller', name:'Keep it, smaller', desc:'Worth doing. Scale back the version you do now.'},
+  {id:'handoff', name:'Hand it off',      desc:"Worth doing, and it doesn't have to be you."},
+  {id:'swap',    name:'Swap it',          desc:"The tradition matters. The way you do it now isn't working."},
+  {id:'letgo',   name:'Let it go',        desc:"Costs more than it gives. It's okay to put this down."}
+];
+var REASON = {
+  keep:    "This one brings real joy and doesn't cost much. What would make it even more enjoyable this year?",
+  smaller: "This one matters to you, and the current version costs a lot. What's the part you love most, and could you keep just that?",
+  handoff: "This one matters, and it's heavy to carry. Who could take it over, or share it with you?",
+  swap:    "The tradition means something, and the way you do it now causes trouble. What do you want to keep about it, and what other form could carry that?",
+  letgo:   "This one costs more than it gives, and few people would miss it. What would you do with the time and energy if you set it down?"
+};
+
+// Deterministic, gentle suggestion. Scores are 1-5; s and h are 0 (no), 1 (maybe), 2 (yes).
+function suggest(i){
+  var avg = (i.m + i.t + i.x) / 3;
+  var burden = i.c + i.k;
+  if (i.t >= 4 && (i.m <= 2 || i.c >= 4)) return 'swap';
+  if (i.who === 'expect' && i.x <= 2 && i.m <= 3) return 'letgo';
+  if (avg <= 2.3 && burden >= 6) return 'letgo';
+  if (avg >= 3.3 && burden <= 5) return 'keep';
+  if (burden >= 6 && i.h === 2 && avg >= 2.6) return 'handoff';
+  if (burden >= 5) {
+    if (i.s >= 1) return 'smaller';
+    if (i.h >= 1 && avg >= 2.6) return 'handoff';
+    return avg >= 2.6 ? 'smaller' : 'letgo';
+  }
+  if (avg < 2.6) return 'letgo';
+  return 'keep';
+}
+//END suggest
+
+function load(){ try { var s = localStorage.getItem(STORE); return s ? JSON.parse(s) : null; } catch(e){ return null; } }
+function save(){ try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){} }
+var state = load() || {step:'intro', items:[], idx:0};
+
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+function app(){ return document.getElementById('app'); }
+function complete(it){ return ['m','c','t','k','x','who','s','h'].every(function(k){ return it[k] !== null && it[k] !== undefined; }); }
+function hasName(n){ return state.items.some(function(i){ return i.name.toLowerCase() === n.toLowerCase(); }); }
+
+function go(step, idx){
+  state.step = step;
+  if (typeof idx === 'number') state.idx = idx;
+  save(); render(); window.scrollTo(0,0);
+}
+
+function render(){
+  var h = '';
+  if (state.step === 'intro') h = viewIntro();
+  else if (state.step === 'add') h = viewAdd();
+  else if (state.step === 'rate') h = viewRate();
+  else h = viewResults();
+  app().innerHTML = h;
+}
+
+function viewIntro(){
+  var resume = state.items.length ? '<button class="btn ghost" data-act="resume">Pick up where I left off</button>' : '';
+  return '<div class="frame"><div class="inner"><h1 class="title"><span class="merry">merry</span><span class="plus">+ mentally ok</span></h1>' +
+    '<p class="sub">the holiday decision maker</p>' +
+    '<p>Settle in with a blanket and something warm to drink.</p>' +
+    '<p>The holidays come with a long list of things you said yes to. Some of them you love. Some of them you do out of habit, or because someone expects it.</p>' +
+    "<p>List what's on your plate and rate each thing in about a minute. You'll get something to think about for each one, along with a place to put it: keep it, keep it smaller, hand it off, swap it, or let it go. You make the final call.</p>" +
+    '<p class="muted small">A typical list takes about 10 minutes.</p>' +
+    '<div class="row"><button class="btn" data-act="start">Start my list</button>' + resume + '</div></div></div>';
+}
+
+function viewAdd(){
+  var chips = CHIPS.map(function(c){
+    return '<button class="chip" data-act="chip" data-name="' + esc(c) + '"' + (hasName(c) ? ' disabled' : '') + '>' + esc(c) + '</button>';
+  }).join('');
+  var list = state.items.map(function(i){
+    return '<li><span>' + esc(i.name) + '</span><button class="x" data-act="remove" data-id="' + i.id + '" aria-label="Remove ' + esc(i.name) + '">&times;</button></li>';
+  }).join('');
+  return '<h2>' + "What's on your holiday plate?" + '</h2>' +
+    '<p>Add the events, traditions, tasks, and trips you are thinking about. Start with the ones that feel heaviest.</p>' +
+    '<div class="add-row"><input type="text" id="newItem" placeholder="For example: Hosting Christmas dinner" maxlength="80" aria-label="Add something to your list"><button class="btn" data-act="add">Add</button></div>' +
+    '<p class="muted small" style="margin:14px 0 0">Or tap to add:</p><div class="chips">' + chips + '</div>' +
+    '<ul class="list">' + list + '</ul>' +
+    '<div class="nav"><button class="btn ghost" data-act="toIntro">Back</button><button class="btn" data-act="toRate"' + (state.items.length ? '' : ' disabled') + '>Start rating (' + state.items.length + ')</button></div>';
+}
+
+function viewRate(){
+  var it = state.items[state.idx];
+  var last = state.idx === state.items.length - 1;
+  var qs = QUESTIONS.map(function(q){
+    var btns = [1,2,3,4,5].map(function(n){
+      return '<button data-act="pick" data-k="' + q.k + '" data-v="' + n + '" aria-pressed="' + (it[q.k] === n) + '" aria-label="' + n + ' of 5">' + n + '</button>';
+    }).join('');
+    return '<div class="q"><p class="q-title">' + esc(q.t) + '</p><div class="scale" role="group" aria-label="' + esc(q.t) + '">' + btns + '</div><div class="ends"><span>' + q.lo + '</span><span>' + q.hi + '</span></div></div>';
+  }).join('');
+  var who = WHO.map(function(w){
+    return '<button data-act="pick" data-k="who" data-v="' + w[0] + '" aria-pressed="' + (it.who === w[0]) + '">' + esc(w[1]) + '</button>';
+  }).join('');
+  function yn(k){
+    return YMN.map(function(o){
+      return '<button data-act="pick" data-k="' + k + '" data-v="' + o[0] + '" aria-pressed="' + (it[k] === o[0]) + '">' + o[1] + '</button>';
+    }).join('');
+  }
+  return '<p class="progress">Item ' + (state.idx + 1) + ' of ' + state.items.length + '</p>' +
+    '<h2>' + esc(it.name) + '</h2>' +
+    '<div style="margin-top:24px">' + qs +
+    '<div class="q"><p class="q-title">Who is this mostly for?</p><div class="opts">' + who + '</div></div>' +
+    '<div class="q"><p class="q-title">Could a smaller version work?</p><div class="opts">' + yn('s') + '</div></div>' +
+    '<div class="q"><p class="q-title">Could someone else take it on?</p><div class="opts">' + yn('h') + '</div></div></div>' +
+    '<div class="nav"><button class="btn ghost" data-act="back">Back</button><button class="btn" data-act="next"' + (complete(it) ? '' : ' disabled') + '>' + (last ? 'See my list' : 'Next item') + '</button></div>';
+}
+
+var SHORT = {m:'Joy', c:'Crash out risk', t:'Tradition', k:'Cost', x:'Would be missed'};
+function pickLabel(list, val){
+  for (var n = 0; n < list.length; n++) { if (list[n][0] === val) return list[n][1]; }
+  return '';
+}
+function ratingsHtml(i){
+  var meters = QUESTIONS.map(function(q){
+    var dots = '';
+    for (var d = 1; d <= 5; d++) dots += '<span class="dot' + (d <= i[q.k] ? ' on' : '') + '"></span>';
+    return '<div class="rt"><span>' + SHORT[q.k] + '</span><span class="dots" role="img" aria-label="' + SHORT[q.k] + ': ' + i[q.k] + ' out of 5">' + dots + '</span></div>';
+  }).join('');
+  return '<div class="ratings"><div class="rt-grid">' + meters + '</div>' +
+    '<p class="rt-line">Mostly for: <strong>' + esc(pickLabel(WHO, i.who)) + '</strong> &middot; Smaller version could work: <strong>' + pickLabel(YMN, i.s) + '</strong> &middot; Someone else could take it on: <strong>' + pickLabel(YMN, i.h) + '</strong></p></div>';
+}
+
+function viewResults(){
+  var items = state.items;
+  var out = '<h1 class="script">your holiday list</h1>' +
+    "<p>Based on your answers, here's what to think about for each one and where it might fit. Your ratings are on each card so you can check them as you decide what to move. You know your family and your season. Move anything that doesn't feel right, and jot down what you plan to do.</p>";
+  BUCKETS.forEach(function(b){
+    var list = items.filter(function(i){ return i.bucket === b.id; });
+    if (!list.length) return;
+    out += '<section class="bucket"><h2>' + b.name + '</h2><p class="muted">' + b.desc + '</p>';
+    list.forEach(function(i){
+      var opts = BUCKETS.map(function(o){ return '<option value="' + o.id + '"' + (o.id === i.bucket ? ' selected' : '') + '>' + o.name + '</option>'; }).join('');
+      out += '<div class="card"><h3>' + esc(i.name) + '</h3>' + ratingsHtml(i) +
+        '<p class="why">' + (i.bucket === i.suggested ? '<strong>What to think about:</strong> ' + REASON[i.bucket] : 'You moved this one here.') + '</p>' +
+        '<label class="move no-print">Move to <select data-move="' + i.id + '">' + opts + '</select></label>' +
+        '<label class="note">What I\'m doing about this<textarea data-note="' + i.id + '" rows="2">' + esc(i.note || '') + '</textarea></label></div>';
+    });
+    out += '</section>';
+  });
+  out += '<div class="actions no-print"><button class="btn" data-act="print">Print or save as PDF</button><button class="btn ghost" data-act="edit">Edit my ratings</button><button class="btn ghost" data-act="restart">Start over</button></div>';
+  return out;
+}
+
+
+function addItem(name){
+  name = (name || '').trim();
+  if (!name || hasName(name)) return;
+  state.items.push({id:uid(), name:name, m:null, c:null, t:null, k:null, x:null, who:null, s:null, h:null, bucket:null, suggested:null, note:''});
+  save(); render();
+  var inp = document.getElementById('newItem'); if (inp) inp.focus();
+}
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-act]');
+  if (!b || b.disabled) return;
+  var act = b.getAttribute('data-act');
+  if (act === 'start') { go('add'); }
+  else if (act === 'resume') { go(state.items.every(complete) ? 'results' : 'add'); }
+  else if (act === 'toIntro') { go('intro'); }
+  else if (act === 'add') { var inp = document.getElementById('newItem'); addItem(inp.value); }
+  else if (act === 'chip') { addItem(b.getAttribute('data-name')); }
+  else if (act === 'remove') {
+    var id = b.getAttribute('data-id');
+    state.items = state.items.filter(function(i){ return i.id !== id; });
+    save(); render();
+  }
+  else if (act === 'toRate') {
+    var firstOpen = state.items.findIndex(function(i){ return !complete(i); });
+    go('rate', firstOpen === -1 ? 0 : firstOpen);
+  }
+  else if (act === 'pick') {
+    var k = b.getAttribute('data-k'), v = b.getAttribute('data-v');
+    state.items[state.idx][k] = (k === 'who') ? v : Number(v);
+    save(); render();
+  }
+  else if (act === 'back') { if (state.idx > 0) go('rate', state.idx - 1); else go('add'); }
+  else if (act === 'next') {
+    if (state.idx < state.items.length - 1) { go('rate', state.idx + 1); }
+    else {
+      state.items.forEach(function(i){ var s = suggest(i); i.suggested = s; i.bucket = s; });
+      go('results');
+    }
+  }
+  else if (act === 'edit') { go('rate', 0); }
+  else if (act === 'restart') {
+    if (confirm('Start over? This clears your list.')) { state = {step:'intro', items:[], idx:0}; save(); render(); window.scrollTo(0,0); }
+  }
+  else if (act === 'print') { window.print(); }
+});
+
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && e.target && e.target.id === 'newItem') { e.preventDefault(); addItem(e.target.value); }
+});
+
+document.addEventListener('change', function(e){
+  var id = e.target.getAttribute && e.target.getAttribute('data-move');
+  if (id) {
+    var it = state.items.find(function(i){ return i.id === id; });
+    if (it) { it.bucket = e.target.value; save(); render(); }
+  }
+});
+
+document.addEventListener('input', function(e){
+  var id = e.target.getAttribute && e.target.getAttribute('data-note');
+  if (id) {
+    var it = state.items.find(function(i){ return i.id === id; });
+    if (it) { it.note = e.target.value; save(); }
+  }
+});
+
+render();
+</script>
+</body>
+</html>
