@@ -307,20 +307,65 @@ function viewResults(){
     out += '</section>';
   });
   out += '<div class="actions no-print"><button class="btn" data-act="print">Print or save as PDF</button><button class="btn ghost" data-act="edit">Edit my ratings</button><button class="btn ghost" data-act="restart">Start over</button></div>';
+  out += '<div class="email no-print"><h3>Want a copy in your inbox?</h3>' +
+    '<p class="small">This opens your email app with your list and ratings filled in. Add your own address and send it. Nothing is sent to us.</p>' +
+    '<button class="btn" data-act="mailme">Email my list to myself</button><p class="status" id="mailStatus" role="status"></p></div>';
   return out;
 }
 
-function summaryText(){
+function summaryText(withRatings){
   var t = 'merry + mentally ok: my holiday list\n\n';
   BUCKETS.forEach(function(b){
     var list = state.items.filter(function(i){ return i.bucket === b.id; });
     if (!list.length) return;
     t += b.name.toUpperCase() + '\n';
-    list.forEach(function(i){ t += '- ' + i.name + (i.note ? ': ' + i.note : '') + '\n'; });
+    list.forEach(function(i){
+      t += '- ' + i.name + '\n';
+      if (withRatings !== false) t += '  ' + Object.keys(SHORT).map(function(k){ return SHORT[k] + ' ' + i[k] + '/5'; }).join(', ') + '\n';
+      if (i.note) t += '  What I\'m doing: ' + i.note + '\n';
+    });
     t += '\n';
   });
   t += 'Want help with what\'s still on your mind? Book a session with The Coacherie: https://paperbell.me/coacherie\n';
   return t;
+}
+
+// Email my list to myself: opens the person's own email app with the list filled in.
+// Nothing is sent to or collected by us. Very long lists don't fit in an email link,
+// so drop the ratings first, and if it is still too long, copy the text instead.
+var MAILTO_MAX = 1900;
+function openMail(url){ window.location.href = url; }
+function mailStatus(msg){ var el = document.getElementById('mailStatus'); if (el) el.textContent = msg; }
+function copyText(text, done, fail){
+  function fallback(){
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      var ok = document.execCommand('copy'); ta.remove();
+      ok ? done() : fail();
+    } catch(e){ fail(); }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}
+function mailMe(){
+  var subject = 'My holiday list: merry + mentally ok';
+  var variants = [true, false];
+  for (var n = 0; n < variants.length; n++) {
+    var body = summaryText(variants[n]).replace(/\n/g, '\r\n');
+    var url = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    if (url.length <= MAILTO_MAX) {
+      mailStatus(variants[n] ? 'Opening your email app. Add your own address and send.' : 'Opening your email app. Your list was long, so the ratings were left out of the email.');
+      openMail(url);
+      return;
+    }
+  }
+  copyText(summaryText(true), function(){
+    mailStatus('Your list is too long for an email link, so it was copied instead. Paste it into a new email to yourself.');
+  }, function(){
+    mailStatus("Your list is too long to email from here. Use Print or save as PDF instead.");
+  });
 }
 
 function addItem(name){
@@ -367,6 +412,7 @@ document.addEventListener('click', function(e){
     if (confirm('Start over? This clears your list.')) { state = {step:'intro', items:[], idx:0}; save(); render(); window.scrollTo(0,0); }
   }
   else if (act === 'print') { window.print(); }
+  else if (act === 'mailme') { mailMe(); }
 });
 
 document.addEventListener('keydown', function(e){
